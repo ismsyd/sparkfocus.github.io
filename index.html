@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SparkFocus · Tiny Habit Squares & Timer</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="tracker-container">
+  <!-- header + pop timer trigger -->
+  <div class="top-bar">
+    <div class="brand">
+      <h1><i class="fas fa-gem"></i> FocusTiles</h1>
+    </div>
+    <div class="pop-trigger-card" id="popTimerTrigger">
+      <i class="fas fa-hourglass-half"></i>
+      <div class="timer-preview">
+        <span id="liveTimerPreview">00:00</span>
+        <small>pop out timer</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- goal and stats row -->
+  <div class="goal-row">
+    <div class="goal-setter">
+      <label><i class="fas fa-bullseye"></i> Daily goal (min)</label>
+      <input type="number" id="goalMinutesInput" min="1" max="300" step="5" value="45">
+      <button id="updateGoalBtn" class="vibrant-btn">Set</button>
+    </div>
+    <div class="stats-group">
+      <div class="stat-badge"><i class="fas fa-calendar-week"></i><span id="totalHitDays">0</span><small>goal days</small></div>
+      <div class="stat-badge"><i class="fas fa-fire"></i><span id="streakCount">0</span><small>streak</small></div>
+    </div>
+  </div>
+
+  <!-- timer & quotes compact -->
+  <div class="action-panel">
+    <div class="timer-card">
+      <div class="big-timer"><span id="timerMinutes">00</span>:<span id="timerSeconds">00</span></div>
+      <div class="timer-actions">
+        <button id="startPauseBtn" class="timer-btn play-pause"><i class="fas fa-play"></i> Start</button>
+        <button id="timerResetBtn" class="timer-btn reset-btn"><i class="fas fa-undo-alt"></i> Reset</button>
+      </div>
+      <button id="logStudyBtn" class="log-btn"><i class="fas fa-check-circle"></i> Log today's study (+ timer minutes)</button>
+      <div id="logFeedback" class="feedback"></div>
+    </div>
+    <div class="quote-mini">
+      <i class="fas fa-quote-left" style="color:#F97316"></i>
+      <div class="quote-text" id="motivationQuote">"The secret of getting ahead is getting started."</div>
+      <button id="refreshQuote" class="quote-refresh"><i class="fas fa-sync-alt"></i> new quote</button>
+    </div>
+  </div>
+
+  <!-- Tiny squares calendar - only changes color when goal is fully hit -->
+  <div class="compact-calendar">
+    <div class="month-bar">
+      <h3 id="monthYearLabel" style="font-size:1.2rem;">April 2026</h3>
+      <div class="month-nav">
+        <button id="prevMonthBtn"><i class="fas fa-chevron-left"></i></button>
+        <button id="nextMonthBtn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="weekdays">
+      <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+    </div>
+    <div id="tinySquaresGrid" class="tiny-grid">
+      <!-- js injects tiny squares -->
+    </div>
+    <div class="legend-compact">
+      <span><i class="fas fa-square-check"></i> Goal achieved</span>
+      <span><i class="fas fa-square"></i> Not yet / below goal</span>
+    </div>
+  </div>
+</div>
+
+<!-- POP OUT TIMER MODAL (real timer, not world clock) -->
+<div id="popTimerModal" class="pop-modal">
+  <div class="pop-card">
+    <div class="pop-header">
+      <h3><i class="fas fa-stopwatch"></i> Focus Pop Timer</h3>
+      <button id="closePopModal" style="background:none; border:none; font-size:1.8rem; cursor:pointer;">&times;</button>
+    </div>
+    <div class="pop-timer-display" id="popTimerDisplay">00:00</div>
+    <div class="pop-buttons">
+      <button id="popStartPauseBtn" class="pop-btn"><i class="fas fa-play"></i> Start/Pause</button>
+      <button id="popResetBtn" class="pop-btn">Reset</button>
+    </div>
+    <div class="feedback" style="margin-top:12px;">synchronized with main timer</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
